@@ -1,0 +1,86 @@
+{
+  "problem": "p006_count_uppercase",
+  "strategy_log": [
+    "第 1 次生成: \"st.tuples(st.text(alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ', min_size=0, max_size=15))\" -> 通过"
+  ],
+  "records": [
+    {
+      "solution": "bug_count_lower.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.33,
+      "counterexample": {
+        "args": [
+          "A"
+        ],
+        "expected": 1,
+        "kind": "ok",
+        "actual": 0
+      },
+      "hints": {
+        "L1": "包含大写字母的输入会出错，因为代码在统计小写字母。",
+        "L2": "输入'A'时，期望输出1，实际输出0。因为代码检查了小写而非大写。",
+        "L3": "条件c.islower()错误，它只计数小写字母，但题目要求计数大写字母。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "bug_only_lower_bound.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.29,
+      "counterexample": {
+        "args": [
+          "a"
+        ],
+        "expected": 0,
+        "kind": "ok",
+        "actual": 1
+      },
+      "hints": {
+        "L1": "包含小写字母的输入会出错，因为代码只检查了下界而未检查上界。",
+        "L2": "输入'a'时，期望输出0但实际输出1。因为'a'≥'A'成立但实际是小写字母。",
+        "L3": "第4行条件c≥'A'错误，小写字母也满足该条件。应同时检查c≤'Z'。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "bug_skip_last.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.28,
+      "counterexample": {
+        "args": [
+          "A"
+        ],
+        "expected": 1,
+        "kind": "ok",
+        "actual": 0
+      },
+      "hints": {
+        "L1": "当字符串长度为1时，代码会出错，因为遍历范围少了一个元素。",
+        "L2": "输入为'A'时，期望输出1，但实际输出0。因为循环范围是range(0)，即空范围。",
+        "L3": "range(len(s)-1) 在s长度为1时变成range(0)，导致完全不进入循环，漏掉了唯一字符。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "correct_isupper.py",
+      "verdict": "correct",
+      "expected_verdict": "correct",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.41,
+      "counterexample": null
+    }
+  ]
+}

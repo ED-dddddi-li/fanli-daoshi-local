@@ -1,0 +1,13 @@
+{
+  "id": "p003_range_span",
+  "title": "极差（最大值减最小值）",
+  "func_name": "range_span",
+  "input_template": {"type": "int_list", "min_len": 0, "max_len": 20, "min_value": -5, "max_value": 5},
+  "expected_verdicts": {
+    "correct_loop.py": "correct",
+    "bug_no_empty_guard.py": "wrong",
+    "bug_assume_min_zero.py": "wrong",
+    "bug_sorted_off_by_one.py": "wrong"
+  },
+  "reviewed_by_li": true
+}

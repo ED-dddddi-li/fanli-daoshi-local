@@ -1,0 +1,13 @@
+{
+  "id": "p006_count_uppercase",
+  "title": "统计大写字母个数",
+  "func_name": "count_uppercase",
+  "input_template": {"type": "str", "min_len": 0, "max_len": 15},
+  "expected_verdicts": {
+    "correct_isupper.py": "correct",
+    "bug_only_lower_bound.py": "wrong",
+    "bug_count_lower.py": "wrong",
+    "bug_skip_last.py": "wrong"
+  },
+  "reviewed_by_li": true
+}

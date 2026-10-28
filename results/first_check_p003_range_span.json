@@ -1,0 +1,90 @@
+{
+  "problem": "p003_range_span",
+  "strategy_log": [
+    "第 1 次生成: 'st.tuples(st.lists(st.integers(-5, 5), min_size=0, max_size=20))' -> 通过"
+  ],
+  "records": [
+    {
+      "solution": "bug_assume_min_zero.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.12,
+      "counterexample": {
+        "args": [
+          [
+            1
+          ]
+        ],
+        "expected": 0,
+        "kind": "ok",
+        "actual": 1
+      },
+      "hints": {
+        "L1": "当列表只有一个正数元素时，代码返回该元素而非0。",
+        "L2": "输入[1]期望输出0，但实际返回1。手动模拟：max([1])是1，直接返回了1。",
+        "L3": "第3行直接返回max(nums)，忽略了最小值可能非0且最大值减最小值应为0的情况。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "bug_no_empty_guard.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.1,
+      "counterexample": {
+        "args": [
+          []
+        ],
+        "expected": 0,
+        "kind": "error",
+        "actual": "ValueError: max() iterable argument is empty"
+      },
+      "hints": {
+        "L1": "空列表输入会导致错误，因为max和min函数无法处理空序列。",
+        "L2": "输入[]时，期望输出0，但实际出现ValueError，因为max([])会抛出异常。",
+        "L3": "代码直接调用max和min，没有先检查列表是否为空，导致空列表时出现异常。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "bug_sorted_off_by_one.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.09,
+      "counterexample": {
+        "args": [
+          [
+            0
+          ]
+        ],
+        "expected": 0,
+        "kind": "error",
+        "actual": "IndexError: list index out of range"
+      },
+      "hints": {
+        "L1": "当列表只有一个元素时，代码会因索引越界而出错。",
+        "L2": "输入[0]时，排序后列表为[0]，但代码试图访问s[1]（第二个元素），导致索引错误。期望输出0，实际报错。",
+        "L3": "第4行`s[1]`在列表长度小于2时越界。应取第一个元素s[0]作为最小值，而非s[1]。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "correct_loop.py",
+      "verdict": "correct",
+      "expected_verdict": "correct",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.32,
+      "counterexample": null
+    }
+  ]
+}

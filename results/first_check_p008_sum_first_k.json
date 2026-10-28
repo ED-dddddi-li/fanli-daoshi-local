@@ -1,0 +1,95 @@
+{
+  "problem": "p008_sum_first_k",
+  "strategy_log": [
+    "第 1 次生成: 'st.tuples(st.lists(st.integers(-5, 5), min_size=0, max_size=8), st.integers(-3, 10))' -> 通过"
+  ],
+  "records": [
+    {
+      "solution": "bug_index_error.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.4,
+      "counterexample": {
+        "args": [
+          [],
+          1
+        ],
+        "expected": 0,
+        "kind": "error",
+        "actual": "IndexError: list index out of range"
+      },
+      "hints": {
+        "L1": "当列表为空且k大于0时，代码会出错。",
+        "L2": "输入nums=[]且k=1时，期望输出0，但实际因访问nums[0]而越界报错。",
+        "L3": "循环range(k)在空列表上仍会执行，试图访问不存在的nums[i]导致IndexError。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "bug_negative_k.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.33,
+      "counterexample": {
+        "args": [
+          [
+            1,
+            0
+          ],
+          -1
+        ],
+        "expected": 0,
+        "kind": "ok",
+        "actual": 1
+      },
+      "hints": {
+        "L1": "k为负数时，切片会从列表末尾倒着截取元素，导致错误求和。",
+        "L2": "输入nums=[1,0], k=-1。期望输出0，但切片nums[:-1]得到[1]，实际输出1。",
+        "L3": "第2行切片nums[:k]在k为负时不会返回空列表，而是从末尾截取，需要单独处理k<=0的情况。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "bug_off_by_one.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.32,
+      "counterexample": {
+        "args": [
+          [
+            0,
+            1
+          ],
+          1
+        ],
+        "expected": 0,
+        "kind": "ok",
+        "actual": 1
+      },
+      "hints": {
+        "L1": "当 k 等于列表长度减一时，代码会多取一个元素。",
+        "L2": "输入 nums=[0,1], k=1。期望输出是第一个元素0，但实际输出是前两个元素的和1。",
+        "L3": "切片 nums[:k+1] 取了前 k+1 个元素，而不是前 k 个。当 k=1 时取了两个元素。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "correct_clamp.py",
+      "verdict": "correct",
+      "expected_verdict": "correct",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.42,
+      "counterexample": null
+    }
+  ]
+}

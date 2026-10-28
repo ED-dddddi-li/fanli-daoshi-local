@@ -1,0 +1,86 @@
+{
+  "problem": "p005_is_palindrome",
+  "strategy_log": [
+    "第 1 次生成: \"st.tuples(st.text(alphabet='abAB ', min_size=0, max_size=15))\" -> 通过"
+  ],
+  "records": [
+    {
+      "solution": "bug_case_sensitive.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.35,
+      "counterexample": {
+        "args": [
+          "Bb"
+        ],
+        "expected": true,
+        "kind": "ok",
+        "actual": false
+      },
+      "hints": {
+        "L1": "包含大小写字母混合但忽略大小写后是回文的输入。",
+        "L2": "输入'Bb'，期望True（忽略大小写后'bb'是回文），实际False（未忽略大小写）。",
+        "L3": "代码第2行未处理大小写，直接比较原字符串，导致'B'和'b'被视为不同字符。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "bug_keep_spaces.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.31,
+      "counterexample": {
+        "args": [
+          "A "
+        ],
+        "expected": true,
+        "kind": "ok",
+        "actual": false
+      },
+      "hints": {
+        "L1": "输入字符串包含空格，且去掉空格后是回文或空。",
+        "L2": "输入'A '，去掉空格后是'A'，是回文，期望True。但代码未去空格，实际比较'A '和' A'，返回False。",
+        "L3": "代码第2行未处理空格，直接比较原字符串（含空格）和反转，导致带空格的非回文被误判。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "bug_off_by_one.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.28,
+      "counterexample": {
+        "args": [
+          "AB"
+        ],
+        "expected": false,
+        "kind": "ok",
+        "actual": true
+      },
+      "hints": {
+        "L1": "输入长度为偶数且非回文时，代码可能出错。",
+        "L2": "输入'AB'，期望False但返回True。手动模拟：i=0,j=1，循环条件i<j-1即0<0不成立，直接返回True。",
+        "L3": "循环条件i<j-1过于严格，当长度为2时(i=0,j=1)跳过循环，漏判唯一一对字符。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "correct_two_pointer.py",
+      "verdict": "correct",
+      "expected_verdict": "correct",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.46,
+      "counterexample": null
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "problem": "p002_is_increasing",
+  "strategy_log": [
+    "第 1 次生成: 'st.tuples(st.lists(st.integers(-5, 5), min_size=0, max_size=20))' -> 通过"
+  ],
+  "records": [
+    {
+      "solution": "bug_allow_equal.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.34,
+      "counterexample": {
+        "args": [
+          [
+            0,
+            0
+          ]
+        ],
+        "expected": false,
+        "kind": "ok",
+        "actual": true
+      },
+      "hints": {
+        "L1": "包含相邻相等元素的列表会让代码出错，因为重复元素不是严格递增。",
+        "L2": "反例 [0,0]：期望 False（有重复），实际 True（只检查大于）。",
+        "L3": "第3行用 > 判断，但重复元素应返回 False，需改为 >="
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "bug_empty_false.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.27,
+      "counterexample": {
+        "args": [
+          []
+        ],
+        "expected": true,
+        "kind": "ok",
+        "actual": false
+      },
+      "hints": {
+        "L1": "空列表输入会出错，因为代码未按约定返回 True。",
+        "L2": "反例是空列表 []，期望输出 True，但实际返回 False。手动模拟：空列表直接返回 False。",
+        "L3": "第2行对空列表返回 False，但约定空列表应返回 True，这里逻辑错误。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "bug_off_by_one.py",
+      "verdict": "wrong",
+      "expected_verdict": "wrong",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.27,
+      "counterexample": {
+        "args": [
+          [
+            0
+          ]
+        ],
+        "expected": true,
+        "kind": "error",
+        "actual": "IndexError: list index out of range"
+      },
+      "hints": {
+        "L1": "当列表只有一个元素时，代码会出错。",
+        "L2": "输入[0]时，期望True，但实际报索引越界错误。手动模拟i=0时访问nums[1]越界。",
+        "L3": "第3行：循环范围是0到len(nums)-1，但nums[i+1]在最后一个元素时会越界。"
+      },
+      "hint_source": "llm",
+      "leak_issues": []
+    },
+    {
+      "solution": "correct_zip.py",
+      "verdict": "correct",
+      "expected_verdict": "correct",
+      "match": true,
+      "strategy_source": "llm:attempt1",
+      "seconds": 1.57,
+      "counterexample": null
+    }
+  ]
+}

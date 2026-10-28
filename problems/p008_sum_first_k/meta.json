@@ -1,0 +1,13 @@
+{
+  "id": "p008_sum_first_k",
+  "title": "前 k 个元素之和",
+  "func_name": "sum_first_k",
+  "input_template": {"type": "int_list_and_int", "min_len": 0, "max_len": 8, "min_value": -5, "max_value": 5, "k_min": -3, "k_max": 10},
+  "expected_verdicts": {
+    "correct_clamp.py": "correct",
+    "bug_off_by_one.py": "wrong",
+    "bug_negative_k.py": "wrong",
+    "bug_index_error.py": "wrong"
+  },
+  "reviewed_by_li": true
+}

@@ -1,0 +1,13 @@
+{
+  "id": "p004_count_vowels",
+  "title": "统计元音字母个数",
+  "func_name": "count_vowels",
+  "input_template": {"type": "str", "min_len": 0, "max_len": 15},
+  "expected_verdicts": {
+    "correct_comprehension.py": "correct",
+    "bug_case_sensitive.py": "wrong",
+    "bug_include_y.py": "wrong",
+    "bug_skip_last.py": "wrong"
+  },
+  "reviewed_by_li": true
+}

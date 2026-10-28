@@ -1,0 +1,13 @@
+{
+  "id": "p005_is_palindrome",
+  "title": "判断是否回文",
+  "func_name": "is_palindrome",
+  "input_template": {"type": "str", "min_len": 0, "max_len": 15, "alphabet": "abAB "},
+  "expected_verdicts": {
+    "correct_two_pointer.py": "correct",
+    "bug_case_sensitive.py": "wrong",
+    "bug_keep_spaces.py": "wrong",
+    "bug_off_by_one.py": "wrong"
+  },
+  "reviewed_by_li": true
+}

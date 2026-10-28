@@ -1,0 +1,13 @@
+{
+  "id": "p002_is_increasing",
+  "title": "判断是否严格递增",
+  "func_name": "is_strictly_increasing",
+  "input_template": {"type": "int_list", "min_len": 0, "max_len": 20, "min_value": -5, "max_value": 5},
+  "expected_verdicts": {
+    "correct_zip.py": "correct",
+    "bug_allow_equal.py": "wrong",
+    "bug_empty_false.py": "wrong",
+    "bug_off_by_one.py": "wrong"
+  },
+  "reviewed_by_li": true
+}

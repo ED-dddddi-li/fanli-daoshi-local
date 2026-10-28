@@ -1,0 +1,13 @@
+{
+  "id": "p007_count_greater",
+  "title": "统计大于 k 的元素个数",
+  "func_name": "count_greater",
+  "input_template": {"type": "int_list_and_int", "min_len": 0, "max_len": 20, "min_value": -5, "max_value": 5, "k_min": -5, "k_max": 5},
+  "expected_verdicts": {
+    "correct_comprehension.py": "correct",
+    "bug_include_equal.py": "wrong",
+    "bug_wrong_direction.py": "wrong",
+    "bug_skip_last.py": "wrong"
+  },
+  "reviewed_by_li": true
+}
